@@ -112,7 +112,7 @@ const CanvasSequence = forwardRef<HTMLDivElement, {}>((props, containerRef) => {
       <div ref={containerRef} className="fixed inset-0 z-20 pointer-events-none flex items-center justify-center will-change-transform">
         <canvas 
           ref={canvasRef} 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain md:object-cover"
         />
       </div>
     </>
