@@ -5,11 +5,20 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
+export interface CanvasSequenceApi {
+  setFrame: (frame: number) => void;
+}
 
-const CanvasSequence = forwardRef<HTMLDivElement, {}>((props, containerRef) => {
+type CanvasSequenceProps = {
+  apiRef?: React.MutableRefObject<CanvasSequenceApi | null>;
+};
+
+const CanvasSequence = forwardRef<HTMLDivElement, CanvasSequenceProps>((props, containerRef) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const totalFrames = 240;
+  
+  const imagesRef = useRef<HTMLImageElement[]>([]);
   
   useGSAP(() => {
     const canvas = canvasRef.current;
@@ -20,7 +29,6 @@ const CanvasSequence = forwardRef<HTMLDivElement, {}>((props, containerRef) => {
     canvas.width = 1400;
     canvas.height = 720;
     
-    const images: HTMLImageElement[] = [];
     let loadedCount = 0;
     
     for (let i = 1; i <= totalFrames; i++) {
@@ -34,33 +42,31 @@ const CanvasSequence = forwardRef<HTMLDivElement, {}>((props, containerRef) => {
           context.drawImage(img, 0, 0, canvas.width, canvas.height);
         }
       };
-      images.push(img);
+      imagesRef.current.push(img);
     }
-    
-    const playhead = { frame: 0 };
-    
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "main",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-      }
-    });
-    
-    tl.to(playhead, {
-      frame: totalFrames - 1,
-      snap: "frame",
-      ease: "none",
-      onUpdate: () => {
-        const currentImage = images[playhead.frame];
-        if (currentImage && currentImage.complete && currentImage.naturalWidth > 0) {
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          context.drawImage(currentImage, 0, 0, canvas.width, canvas.height);
-        }
-      }
-    });
   }, { scope: canvasRef });
+  
+  useEffect(() => {
+    if (props.apiRef) {
+      props.apiRef.current = {
+        setFrame: (frame: number) => {
+          const canvas = canvasRef.current;
+          if (!canvas) return;
+          const context = canvas.getContext('2d');
+          if (!context) return;
+          
+          let actualFrame = Math.floor(frame);
+          actualFrame = ((actualFrame % totalFrames) + totalFrames) % totalFrames;
+          
+          const currentImage = imagesRef.current[actualFrame];
+          if (currentImage && currentImage.complete && currentImage.naturalWidth > 0) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(currentImage, 0, 0, canvas.width, canvas.height);
+          }
+        }
+      };
+    }
+  }, [props.apiRef, totalFrames]);
   
   const [isFullyLoaded, setIsFullyLoaded] = useState(false);
   const [loadingText, setLoadingText] = useState("ESTABLISHING CONNECTION...");
@@ -109,7 +115,7 @@ const CanvasSequence = forwardRef<HTMLDivElement, {}>((props, containerRef) => {
         </div>
       </div>
 
-      <div ref={containerRef} className="fixed inset-0 z-20 pointer-events-none flex items-center justify-center will-change-transform">
+      <div ref={containerRef} className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center will-change-transform">
         <canvas 
           ref={canvasRef} 
           className="w-full h-full object-contain md:object-cover"
