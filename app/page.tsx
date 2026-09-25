@@ -203,7 +203,7 @@ export default function Home() {
       });
 
       // 1. Initial State
-      gsap.set(canvasWrapperRef.current, { x: 0, y: '-15vh', scale: 1.0, opacity: 1 });
+      gsap.set(canvasWrapperRef.current, { x: 0, y: '-10vh', scale: 0.9, opacity: 1 });
 
       gsap.to(heroRef.current, {
         scrollTrigger: { trigger: heroRef.current, start: "center top", end: "bottom top", scrub: 1 },
@@ -213,7 +213,7 @@ export default function Home() {
       // Card 1
       const st1 = { trigger: card1Ref.current, start: "top bottom", end: "center center", scrub: 1 };
       gsap.fromTo(canvasWrapperRef.current, 
-        { x: 0, y: '-15vh', scale: 1.0, opacity: 1 },
+        { x: 0, y: '-10vh', scale: 0.9, opacity: 1 },
         { scrollTrigger: st1, x: 0, y: 0, scale: 1.0, opacity: 1, immediateRender: false }
       );
       
@@ -345,7 +345,7 @@ export default function Home() {
       </header>
 
       {/* 1. Hero */}
-      <section ref={heroRef} className="h-screen w-full relative z-10 flex flex-col justify-end md:justify-center items-center md:items-start pb-8 md:pb-0 px-8 md:px-24">
+      <section ref={heroRef} className="h-screen w-full relative z-[60] flex flex-col justify-end md:justify-center items-center md:items-start pb-8 md:pb-0 px-8 md:px-24">
         <div className="max-w-[400px] text-center md:text-left mx-auto md:mx-0">
           <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-4 md:mb-6 tracking-tight">
             Commercial<br className="hidden md:block"/> Drone Footage.
