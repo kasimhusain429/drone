@@ -5,8 +5,8 @@ const residentialServices = [
   { id: '01', title: 'Construction Monitoring', desc: 'Video and or photography of construction project. Paired with a Project permits you to follow timelines.', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000' },
   { id: '02', title: 'Roofing', desc: 'Ensuring no errors were made and option of thermal inspection to identify potential leaks.', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000' },
   { id: '03', title: 'Interior Ground Data', desc: 'Coupled with 3D Matterport.', img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000' },
-  { id: '04', title: 'Real Estate', desc: 'Real Estate videography and walkthrough.', img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2000' },
-  { id: '05', title: 'Special', desc: 'High end custom car and truck video creation.', img: 'https://images.unsplash.com/photo-1503376713356-20d6c4c51cf5?q=80&w=2000' },
+  { id: '04', title: 'Real Estate', desc: 'Real Estate videography and walkthrough.', img: '/images/uploaded/media_1790585529102.jpg' },
+  { id: '05', title: 'Special', desc: 'High end custom car and truck video creation.', img: '/images/uploaded/media_1790585529089.jpg' },
 ];
 
 export default function ResidentialSection() {
@@ -59,9 +59,9 @@ export default function ResidentialSection() {
                         <p className="text-neutral-400 text-sm leading-relaxed">
                           {service.desc}
                         </p>
-                        <button className="w-max px-5 py-2 rounded-full border border-white/20 text-[10px] font-semibold uppercase tracking-widest hover:bg-white/10 transition mt-2">
+                        <a href="#portfolio" className="w-max px-5 py-2 rounded-full border border-white/20 text-[10px] font-semibold uppercase tracking-widest hover:bg-white/10 transition mt-2 inline-block">
                           View Portfolio
-                        </button>
+                        </a>
                       </div>
                     )}
                   </div>
@@ -104,9 +104,9 @@ export default function ResidentialSection() {
                       </p>
                       
                       <div className="mt-8">
-                        <button className="px-6 py-3 rounded-full border border-white/20 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition">
+                        <a href="#portfolio" className="px-6 py-3 rounded-full border border-white/20 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition inline-block">
                           View Portfolio
-                        </button>
+                        </a>
                       </div>
                     </div>
 

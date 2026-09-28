@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 
 const commercialServices = [
   { id: '01', title: 'Pre-Construction', desc: 'Capture a comprehensive visual record of the site before work begins—establishing a reliable baseline for progress monitoring, verification, and dispute protection.', img: '/images/construction_progress_1789982002449.jpg' },
-  { id: '02', title: 'Construction Monitoring', desc: 'Capture the site’s condition before construction begins, providing documented evidence for progress monitoring, verification, and dispute resolution.', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000' },
-  { id: '03', title: 'Ground Monitoring', desc: 'Integrate aerial imagery and Matterport 3D technology to deliver a detailed digital replica of your project, providing stakeholders with remote, interactive access to the site.', img: 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=2000' },
+  { id: '02', title: 'Construction Monitoring', desc: 'Capture the site’s condition before construction begins, providing documented evidence for progress monitoring, verification, and dispute resolution.', img: '/images/construction_monitoring.jpg' },
+  { id: '03', title: 'Ground Monitoring', desc: 'Integrate aerial imagery and Matterport 3D technology to deliver a detailed digital replica of your project, providing stakeholders with remote, interactive access to the site.', img: '/images/ground_monitoring.jpg' },
   { id: '04', title: 'Roofing', desc: 'Regular inspections help identify issues early, protect your property’s value, and reduce costly maintenance and compliance risks.', img: '/images/roofing_inspection_1789981969219.jpg' },
-  { id: '05', title: 'Solar Inspection', desc: 'Capture clear, detailed imagery of your roof’s current condition, with optional thermal imaging to help identify potential leaks, moisture, and hidden issues.', img: '/images/solar_inspection_1789981984532.jpg' },
-  { id: '06', title: 'Property Maintenance', desc: 'Verify project quality with detailed aerial imagery, with optional thermal imaging to identify potential leaks, moisture intrusion, and other hidden issues.', img: 'https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=2000' },
+  { id: '05', title: 'Solar Inspection', desc: 'Capture clear, detailed imagery of your roof’s current condition, with optional thermal imaging to help identify potential leaks, moisture, and hidden issues.', img: '/images/uploaded/media_1790585529115.jpg' },
+  { id: '06', title: 'Property Maintenance', desc: 'Verify project quality with detailed aerial imagery, with optional thermal imaging to identify potential leaks, moisture intrusion, and other hidden issues.', img: '/images/property_maintenance.jpg' },
 ];
 
 export default function ServicesSection() {
@@ -60,9 +60,9 @@ export default function ServicesSection() {
                         <p className="text-neutral-400 text-sm leading-relaxed">
                           {service.desc}
                         </p>
-                        <button className="w-max px-5 py-2 rounded-full border border-white/20 text-[10px] font-semibold uppercase tracking-widest hover:bg-white/10 transition mt-2">
+                        <a href="#portfolio" className="w-max px-5 py-2 rounded-full border border-white/20 text-[10px] font-semibold uppercase tracking-widest hover:bg-white/10 transition mt-2 inline-block">
                           View Portfolio
-                        </button>
+                        </a>
                       </div>
                     )}
                   </div>
@@ -105,9 +105,9 @@ export default function ServicesSection() {
                       </p>
                       
                       <div className="mt-8">
-                        <button className="px-6 py-3 rounded-full border border-white/20 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition">
+                        <a href="#portfolio" className="px-6 py-3 rounded-full border border-white/20 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition inline-block">
                           View Portfolio
-                        </button>
+                        </a>
                       </div>
                     </div>
 

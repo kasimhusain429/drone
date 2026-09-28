@@ -330,14 +330,14 @@ export default function Home() {
           <img src="/Logo-2.png" alt="Dronefuze" className="h-8 object-contain" />
         </div>
         <nav className="hidden md:flex backdrop-blur-md border border-current/10 rounded-full px-6 py-2 gap-8 text-sm font-medium">
-          <a href="#" className="hover:opacity-70 transition">Home</a>
-          <a href="#" className="hover:opacity-70 transition">Services</a>
-          <a href="#" className="hover:opacity-70 transition">Portfolio</a>
-          <a href="#" className="hover:opacity-70 transition">Contact</a>
+          <a href="#home" className="hover:opacity-70 transition">Home</a>
+          <a href="#services" className="hover:opacity-70 transition">Services</a>
+          <a href="#portfolio" className="hover:opacity-70 transition">Portfolio</a>
+          <a href="#contact" className="hover:opacity-70 transition">Contact</a>
         </nav>
         <div className="hidden md:flex gap-4 text-sm font-semibold">
-          <button className="px-5 py-2 rounded-full border border-current hover:opacity-70 transition">Login</button>
-          <button className="px-5 py-2 rounded-full bg-lime-400 text-black border border-lime-400 hover:bg-lime-500 transition">Sign Up</button>
+          <a href="#services" className="px-5 py-2 rounded-full bg-lime-400 text-black border border-lime-400 hover:bg-lime-500 transition flex items-center justify-center">View Services</a>
+          <a href="#contact" className="px-5 py-2 rounded-full border border-current hover:opacity-70 transition flex items-center justify-center">Contact Us</a>
         </div>
         <button className="md:hidden">
            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -345,7 +345,7 @@ export default function Home() {
       </header>
 
       {/* 1. Hero */}
-      <section ref={heroRef} className="h-[100dvh] w-full relative z-10 flex flex-col justify-end md:justify-center items-center md:items-start pb-20 md:pb-0 px-8 md:px-24">
+      <section id="home" ref={heroRef} className="h-[100dvh] w-full relative z-10 flex flex-col justify-end md:justify-center items-center md:items-start pb-20 md:pb-0 px-8 md:px-24">
         <div className="max-w-[400px] text-center md:text-left mx-auto md:mx-0">
           <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-4 md:mb-6 tracking-tight">
             Commercial<br className="hidden md:block"/> Drone Footage.
@@ -362,9 +362,8 @@ export default function Home() {
           <div className="flex justify-between items-center text-white">
             <div className="flex items-center gap-2">
                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-               <span className="text-xs font-bold tracking-widest text-neutral-400">PREMIUM</span>
+               <span className="text-xs font-bold tracking-widest text-lime-400">COMMERCIAL</span>
             </div>
-            <button className="px-4 py-2 rounded-full border border-white/20 text-xs md:text-sm font-medium hover:bg-white/10 transition">Dronefuze</button>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center w-full mt-8 md:mt-8 text-white gap-[30vh] md:gap-0">
             <div ref={c1Left} className="w-full md:w-[25%] text-center md:text-left">
@@ -378,17 +377,17 @@ export default function Home() {
             </div>
           </div>
           <div ref={c1Bottom} className="flex flex-col md:flex-row justify-between items-center md:items-end text-white gap-6 md:gap-0 mt-8 md:mt-0 text-center md:text-left">
-            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified <br className="hidden md:block"/>and Fully Insured</h3>
-            <button className="px-8 py-3 bg-white/10 rounded-full text-sm font-medium hover:bg-white/20 transition flex items-center gap-2">
+            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified <br className="hidden md:block"/>Fully Insured</h3>
+            <a href="#services" className="px-8 py-3 bg-white/10 rounded-full text-sm font-medium hover:bg-white/20 transition flex items-center gap-2">
               Learn More 
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* 3. Commercial Details */}
-      <section ref={servicesRef} className="relative z-30 min-h-screen bg-[#050505] border-t border-b border-white/5 pb-16">
+      <section id="services" ref={servicesRef} className="relative z-30 min-h-screen bg-[#050505] border-t border-b border-white/5 pb-16">
         <ServicesSection />
       </section>
 
@@ -398,9 +397,8 @@ export default function Home() {
           <div className="flex justify-between items-center text-white">
             <div className="flex items-center gap-2">
                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-               <span className="text-xs font-bold tracking-widest text-neutral-400">RESIDENTIAL</span>
+               <span className="text-xs font-bold tracking-widest text-lime-400">RESIDENTIAL</span>
             </div>
-            <button className="px-4 py-2 rounded-full border border-white/20 text-xs md:text-sm font-medium hover:bg-white/10 transition">Dronefuze</button>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center w-full mt-8 md:mt-8 text-white gap-[30vh] md:gap-0">
             <div ref={c2Left} className="w-full md:w-[25%] text-center md:text-left">
@@ -412,22 +410,22 @@ export default function Home() {
             </div>
           </div>
           <div ref={c2Bottom} className="flex flex-col md:flex-row justify-between items-center md:items-end text-white gap-6 md:gap-0 mt-8 md:mt-0 text-center md:text-left">
-            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified <br className="hidden md:block"/>and Fully Insured</h3>
-            <button className="px-8 py-3 bg-white/10 rounded-full text-sm font-medium hover:bg-white/20 transition flex items-center gap-2">
+            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified <br className="hidden md:block"/>Fully Insured</h3>
+            <a href="#residential" className="px-8 py-3 bg-white/10 rounded-full text-sm font-medium hover:bg-white/20 transition flex items-center gap-2">
               Learn More 
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* 5. Residential Details */}
-      <section ref={residentialRef} className="relative z-30 min-h-screen bg-[#0a0a0a] border-t border-b border-white/5 pb-16">
+      <section id="residential" ref={residentialRef} className="relative z-30 min-h-screen bg-[#0a0a0a] border-t border-b border-white/5 pb-16">
         <ResidentialSection />
       </section>
 
       {/* 6. Floating Image Gallery */}
-      <section ref={galleryRef} className="h-[120vh] relative z-20 flex items-center justify-center overflow-hidden -mt-16">
+      <section id="portfolio" ref={galleryRef} className="h-[120vh] relative z-20 flex items-center justify-center overflow-hidden -mt-16">
         <h2 ref={floatingTitleRef} className="absolute top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl font-bold text-white tracking-tight text-center px-4 md:px-6 z-10 drop-shadow-2xl bg-black/50 backdrop-blur-md py-3 md:py-4 rounded-full border border-white/10 w-max max-w-[90vw] md:max-w-full">Premium Quality Imagery</h2>
         
         <div ref={img5Ref} className="absolute top-[25%] md:top-[22%] left-[2%] md:left-[5%] w-[100px] md:w-[280px] aspect-square rounded-2xl md:rounded-[30px] overflow-hidden shadow-2xl border-2 md:border-4 border-white">
@@ -460,28 +458,30 @@ export default function Home() {
         <FAQSection />
       </section>
 
-      <footer ref={footerRef} className="relative w-full pt-10 pb-6 bg-transparent flex flex-col items-center justify-center border-t border-white/10 z-50 overflow-hidden">
-        <h2 className="text-[12vw] md:text-[8.5vw] font-black text-white tracking-tighter leading-tight mb-2 pt-2">Dronefuze</h2>
-        <form className="w-full max-w-lg px-8 mb-8 flex flex-col gap-3 text-left relative z-10">
-          <div className="flex flex-col gap-1.5">
-            <label className="text-neutral-300 text-xs font-semibold tracking-wide">Provide your Email*</label>
-            <input type="email" placeholder="john@example.com" className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-lime-400/30 focus:border-lime-400 transition" required />
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <label className="text-neutral-300 text-xs font-semibold tracking-wide">Your message*</label>
-            <textarea placeholder="" rows={3} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-lime-400/30 focus:border-lime-400 transition resize-none" required></textarea>
-          </div>
-          <div className="flex justify-end mt-1">
-            <button type="submit" className="px-8 py-2.5 bg-lime-400 text-black font-bold rounded-full hover:bg-lime-500 transition shadow-[0_0_15px_rgba(163,230,53,0.4)]">Submit</button>
-          </div>
-        </form>
-        <div className="w-full px-6 md:px-12 flex flex-col mt-2">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 text-neutral-400 text-sm font-medium mb-4">
+      <footer id="contact" ref={footerRef} className="relative w-full h-[100dvh] pt-[100px] pb-6 bg-transparent flex flex-col items-center justify-between border-t border-white/10 z-40 overflow-hidden">
+        <div className="w-full flex-1 flex flex-col items-center justify-center min-h-0">
+          <h2 className="text-[10vw] md:text-[7vw] font-black text-white tracking-tighter leading-tight mb-4">Dronefuze</h2>
+          <form className="w-full max-w-lg px-8 flex flex-col gap-2.5 text-left relative z-10">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-neutral-300 text-xs font-semibold tracking-wide">Provide your Email*</label>
+              <input type="email" placeholder="john@example.com" className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2 text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-lime-400/30 focus:border-lime-400 transition" required />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-neutral-300 text-xs font-semibold tracking-wide">Your message*</label>
+              <textarea placeholder="" rows={2} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-lime-400/30 focus:border-lime-400 transition resize-none" required></textarea>
+            </div>
+            <div className="flex justify-end mt-1">
+              <button type="submit" className="px-8 py-2 bg-lime-400 text-black font-bold rounded-full hover:bg-lime-500 transition shadow-[0_0_15px_rgba(163,230,53,0.4)]">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div className="w-full px-6 md:px-12 flex flex-col mt-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 text-neutral-400 text-sm font-medium mb-3">
             <div className="flex flex-col max-w-lg">
-              <div className="w-10 h-1.5 bg-lime-400 mb-2"></div>
-              <span className="text-white text-2xl md:text-3xl font-bold tracking-tight mb-2">DroneFuze</span>
-              <span className="text-xs md:text-[13px] leading-tight">Drone Footage - Construction - Solar - Commercial Real Estate.</span>
-              <span className="text-xs md:text-[13px] leading-tight">Estate. Central Operations: Las Vegas, Hawaii</span>
+              <div className="w-8 h-1.5 bg-lime-400 mb-2"></div>
+              <span className="text-white text-xl md:text-3xl font-bold tracking-tight mb-1">DroneFuze</span>
+              <span className="text-[11px] md:text-[13px] leading-tight">Drone Footage - Construction - Solar - Commercial Real Estate.</span>
+              <span className="text-[11px] md:text-[13px] leading-tight">Central Operations: Las Vegas, Hawaii</span>
             </div>
             <div className="flex gap-4 items-center self-start md:self-center">
               <a href="#" className="text-lime-400 hover:text-white transition">
@@ -491,20 +491,20 @@ export default function Home() {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               </a>
             </div>
-            <div className="flex flex-col gap-1 md:text-right">
-              <span className="text-lime-400 font-bold text-[13px] mb-1">Dispatch & Ops</span>
-              <span className="text-neutral-300 text-xs">Admin@Dronefuze.com</span>
-              <span className="text-neutral-300 text-xs">+1 (949) 433-7838</span>
+            <div className="flex flex-col gap-0.5 md:text-right">
+              <span className="text-lime-400 font-bold text-[13px]">Dispatch & Ops</span>
+              <span className="text-neutral-300 text-[11px] md:text-xs">Admin@Dronefuze.com</span>
+              <span className="text-neutral-300 text-[11px] md:text-xs">+1 (949) 433-7838</span>
             </div>
           </div>
-          <div className="w-full border-t-2 border-[#6b21a8] mb-2"></div>
-          <div className="flex flex-col md:flex-row justify-between items-center text-[11px] text-neutral-400 font-medium pb-4">
-            <p>© 2026 DroneFuze-Aerial and Ground Video and Imagery</p>
-            <p className="text-lime-400 font-bold tracking-wide mt-2 md:mt-0 uppercase">FAA-107Certified and Fully Insured</p>
+          <div className="w-full border-t border-[#6b21a8]/50 mb-2"></div>
+          <div className="flex flex-col md:flex-row justify-between items-center text-[10px] md:text-[11px] text-neutral-400 font-medium pb-2">
+            <p>© 2026 DroneFuze-Aerial and Ground Video</p>
+            <p className="text-lime-400 font-bold tracking-wide mt-1 md:mt-0 uppercase">FAA-107 Certified</p>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-center pt-2 gap-4">
-            <img src="/Drone-Logo-2 long.png" alt="Dronefuze Imagery" className="h-10 md:h-12 object-contain" />
-            <button className="bg-lime-400 text-black px-6 py-2.5 rounded-lg font-bold text-sm hover:bg-lime-500 transition shadow-lg w-full md:w-auto">
+          <div className="flex justify-between items-center pt-2">
+            <img src="/Drone-Logo-2 long.png" alt="Dronefuze Imagery" className="h-8 md:h-10 object-contain" />
+            <button className="bg-lime-400 text-black px-4 md:px-6 py-2 rounded-lg font-bold text-xs md:text-sm hover:bg-lime-500 transition shadow-lg">
               Call 949-433-7838
             </button>
           </div>
