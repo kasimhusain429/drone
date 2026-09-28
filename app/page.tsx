@@ -58,7 +58,7 @@ export default function Home() {
       }
     };
 
-    let mm = gsap.matchMedia(containerRef);
+    const mm = gsap.matchMedia(containerRef);
 
     mm.add("(min-width: 768px)", () => {
       // MASTER ROTATION TIMELINE
@@ -345,7 +345,7 @@ export default function Home() {
       </header>
 
       {/* 1. Hero */}
-      <section ref={heroRef} className="h-screen w-full relative z-10 flex flex-col justify-end md:justify-center items-center md:items-start pb-8 md:pb-0 px-8 md:px-24">
+      <section ref={heroRef} className="h-[100dvh] w-full relative z-10 flex flex-col justify-end md:justify-center items-center md:items-start pb-20 md:pb-0 px-8 md:px-24">
         <div className="max-w-[400px] text-center md:text-left mx-auto md:mx-0">
           <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-4 md:mb-6 tracking-tight">
             Commercial<br className="hidden md:block"/> Drone Footage.
@@ -358,7 +358,7 @@ export default function Home() {
 
       {/* 2. Commercial Card */}
       <section ref={card1Ref} className="h-[120vh] w-full relative z-20 flex items-center justify-center">
-        <div ref={c1Container} className="w-[90vw] md:w-[90vw] max-w-[1200px] h-[85vh] md:h-[70vh] bg-[#191919]/60 backdrop-blur-[20px] border border-white/10 rounded-[40px] shadow-2xl flex flex-col justify-between p-8 md:p-12">
+        <div ref={c1Container} className="w-[90vw] md:w-[90vw] max-w-[1200px] h-auto min-h-[85vh] md:h-[70vh] md:min-h-0 bg-[#191919]/60 backdrop-blur-[20px] border border-white/10 rounded-[40px] shadow-2xl flex flex-col justify-between p-8 md:p-12">
           <div className="flex justify-between items-center text-white">
             <div className="flex items-center gap-2">
                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -368,7 +368,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center w-full mt-8 md:mt-8 text-white gap-[30vh] md:gap-0">
             <div ref={c1Left} className="w-full md:w-[25%] text-center md:text-left">
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-2 md:mb-4">Roofing &<br className="hidden md:block"/>Solar</h2>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-2 md:mb-4">Roofing & <br className="hidden md:block"/>Solar</h2>
               <p className="text-neutral-400 text-sm md:text-base">Detailed thermal and visual inspections.</p>
             </div>
             <div className="hidden md:block w-[50%]"></div>
@@ -378,7 +378,7 @@ export default function Home() {
             </div>
           </div>
           <div ref={c1Bottom} className="flex flex-col md:flex-row justify-between items-center md:items-end text-white gap-6 md:gap-0 mt-8 md:mt-0 text-center md:text-left">
-            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified<br className="hidden md:block"/>and Fully Insured</h3>
+            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified <br className="hidden md:block"/>and Fully Insured</h3>
             <button className="px-8 py-3 bg-white/10 rounded-full text-sm font-medium hover:bg-white/20 transition flex items-center gap-2">
               Learn More 
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -394,7 +394,7 @@ export default function Home() {
 
       {/* 4. Residential Card */}
       <section ref={card2Ref} className="h-[120vh] w-full relative z-20 flex items-center justify-center -mt-16">
-        <div ref={c2Container} className="w-[90vw] md:w-[90vw] max-w-[1200px] h-[85vh] md:h-[70vh] bg-[#191919]/60 backdrop-blur-[20px] border border-white/10 rounded-[40px] shadow-2xl flex flex-col justify-between p-8 md:p-12">
+        <div ref={c2Container} className="w-[90vw] md:w-[90vw] max-w-[1200px] h-auto min-h-[85vh] md:h-[70vh] md:min-h-0 bg-[#191919]/60 backdrop-blur-[20px] border border-white/10 rounded-[40px] shadow-2xl flex flex-col justify-between p-8 md:p-12">
           <div className="flex justify-between items-center text-white">
             <div className="flex items-center gap-2">
                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -404,7 +404,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center w-full mt-8 md:mt-8 text-white gap-[30vh] md:gap-0">
             <div ref={c2Left} className="w-full md:w-[25%] text-center md:text-left">
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-2 md:mb-4">Real Estate &<br className="hidden md:block"/>Construction</h2>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-2 md:mb-4">Real Estate & <br className="hidden md:block"/>Construction</h2>
             </div>
             <div className="hidden md:block w-[50%]"></div>
             <div ref={c2Right} className="w-full md:w-[25%] text-center md:text-right">
@@ -412,7 +412,7 @@ export default function Home() {
             </div>
           </div>
           <div ref={c2Bottom} className="flex flex-col md:flex-row justify-between items-center md:items-end text-white gap-6 md:gap-0 mt-8 md:mt-0 text-center md:text-left">
-            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified<br className="hidden md:block"/>and Fully Insured</h3>
+            <h3 className="text-xl md:text-3xl font-medium tracking-tight">FAA-107 Certified <br className="hidden md:block"/>and Fully Insured</h3>
             <button className="px-8 py-3 bg-white/10 rounded-full text-sm font-medium hover:bg-white/20 transition flex items-center gap-2">
               Learn More 
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
