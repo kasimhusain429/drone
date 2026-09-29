@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -12,6 +12,16 @@ import FAQSection from '@/components/FAQSection';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const [lightbox, setLightbox] = useState<{src: string, type: 'image'|'video'} | null>(null);
+
+  useEffect(() => {
+    const handleOpen = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      setLightbox(customEvent.detail);
+    };
+    window.addEventListener('open-lightbox', handleOpen);
+    return () => window.removeEventListener('open-lightbox', handleOpen);
+  }, []);
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Sections
@@ -327,7 +337,7 @@ export default function Home() {
       
       <header ref={headerRef} className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center transition-colors duration-300">
         <div className="flex items-center gap-3 font-bold text-xl tracking-tight">
-          <img src="/Logo-2.png" alt="Dronefuze" className="h-8 object-contain" />
+          <img src="/Logo-2.png" alt="Dronefuze" className="h-8 object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(90%) sepia(29%) saturate(1131%) hue-rotate(25deg) brightness(97%) contrast(85%)' }} />
         </div>
         <nav className="hidden md:flex backdrop-blur-md border border-current/10 rounded-full px-6 py-2 gap-8 text-sm font-medium">
           <a href="#home" className="hover:opacity-70 transition">Home</a>
@@ -353,6 +363,38 @@ export default function Home() {
           <p className="text-sm md:text-lg text-neutral-400 mb-6 md:mb-10 leading-relaxed">
             Professional videos and imagery that give decision-makers a clear view of project progress.
           </p>
+        </div>
+      </section>
+
+      {/* 1.5 Requests We Fulfill */}
+      <section className="min-h-screen w-full relative z-20 flex flex-col justify-center px-8 md:px-24 py-20">
+        <div className="w-full md:w-[45%] lg:w-[40%] max-w-[500px] z-10 relative pr-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-8 tracking-tight">
+            Aerial imagery turned into actionable intelligence.
+          </h2>
+          <h3 className="text-xl md:text-2xl italic text-neutral-300 mb-8 font-serif">
+            Requests we fulfill
+          </h3>
+          <ul className="space-y-6">
+            <li className="flex gap-4">
+              <span className="text-lime-400 mt-1 text-xl">•</span>
+              <p className="text-neutral-300 text-lg md:text-xl leading-relaxed">
+                <strong className="text-white font-semibold not-italic">Construction:</strong> <span className="italic">"Providing information on your $20M project without having to walk the entire site."</span>
+              </p>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-lime-400 mt-1 text-xl">•</span>
+              <p className="text-neutral-300 text-lg md:text-xl leading-relaxed">
+                <strong className="text-white font-semibold not-italic">Solar owners:</strong> <span className="italic">"Find problems across thousands of panels before they become expensive problems."</span>
+              </p>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-lime-400 mt-1 text-xl">•</span>
+              <p className="text-neutral-300 text-lg md:text-xl leading-relaxed">
+                <strong className="text-white font-semibold not-italic">Developers:</strong> <span className="italic">"Provide investors and management team visual proof of progress monthly."</span>
+              </p>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -426,25 +468,25 @@ export default function Home() {
 
       {/* 6. Floating Image Gallery */}
       <section id="portfolio" ref={galleryRef} className="h-[120vh] relative z-20 flex items-center justify-center overflow-hidden -mt-16">
-        <h2 ref={floatingTitleRef} className="absolute top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl font-bold text-white tracking-tight text-center px-4 md:px-6 z-10 drop-shadow-2xl bg-black/50 backdrop-blur-md py-3 md:py-4 rounded-full border border-white/10 w-max max-w-[90vw] md:max-w-full">Premium Quality Imagery</h2>
+        <h2 ref={floatingTitleRef} className="absolute top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 text-2xl md:text-5xl font-bold text-white tracking-tight text-center px-4 md:px-6 z-10 drop-shadow-2xl bg-black/50 backdrop-blur-md py-3 md:py-4 rounded-full border border-white/10 w-max max-w-[90vw] md:max-w-full pointer-events-none">Premium Quality Imagery</h2>
         
-        <div ref={img5Ref} className="absolute top-[25%] md:top-[22%] left-[2%] md:left-[5%] w-[100px] md:w-[280px] aspect-square rounded-2xl md:rounded-[30px] overflow-hidden shadow-2xl border-2 md:border-4 border-white">
+        <div ref={img5Ref} className="absolute top-[25%] md:top-[22%] left-[2%] md:left-[5%] w-[100px] md:w-[280px] aspect-square rounded-2xl md:rounded-[30px] overflow-hidden shadow-2xl border-2 md:border-4 border-white cursor-pointer" onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2000', type: 'image' } }))}>
           <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2000" alt="Real Estate" className="w-full h-full object-cover" />
         </div>
-        <div ref={img1Ref} className="absolute top-[28%] md:top-[18%] right-[2%] md:right-[5%] w-[120px] md:w-[350px] aspect-[16/10] rounded-xl md:rounded-[40px] overflow-hidden shadow-2xl border-2 md:border-4 border-white">
+        <div ref={img1Ref} className="absolute top-[28%] md:top-[18%] right-[2%] md:right-[5%] w-[120px] md:w-[350px] aspect-[16/10] rounded-xl md:rounded-[40px] overflow-hidden shadow-2xl border-2 md:border-4 border-white cursor-pointer" onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: '/images/roofing_inspection_1789981969219.jpg', type: 'image' } }))}>
           <img src="/images/roofing_inspection_1789981969219.jpg" alt="Roofing" className="w-full h-full object-cover" />
-          <span className="absolute bottom-2 md:bottom-6 right-3 md:right-6 text-white font-bold text-xs md:text-xl drop-shadow-lg tracking-wide">Roofing</span>
+          <span className="absolute bottom-2 md:bottom-6 right-3 md:right-6 text-white font-bold text-xs md:text-xl drop-shadow-lg tracking-wide z-20 pointer-events-none">Roofing</span>
         </div>
-        <div ref={img2Ref} className="absolute bottom-[20%] md:bottom-[15%] left-[2%] md:left-[8%] w-[140px] md:w-[380px] aspect-[4/3] rounded-xl md:rounded-[32px] overflow-hidden shadow-2xl border-2 md:border-4 border-white">
+        <div ref={img2Ref} className="absolute bottom-[20%] md:bottom-[15%] left-[2%] md:left-[8%] w-[140px] md:w-[380px] aspect-[4/3] rounded-xl md:rounded-[32px] overflow-hidden shadow-2xl border-2 md:border-4 border-white cursor-pointer" onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: '/images/solar_inspection_1789981984532.jpg', type: 'image' } }))}>
           <img src="/images/solar_inspection_1789981984532.jpg" alt="Solar" className="w-full h-full object-cover" />
-          <span className="absolute bottom-2 md:bottom-6 right-3 md:right-6 text-white font-bold text-xs md:text-xl drop-shadow-lg tracking-wide">Solar</span>
+          <span className="absolute bottom-2 md:bottom-6 right-3 md:right-6 text-white font-bold text-xs md:text-xl drop-shadow-lg tracking-wide z-20 pointer-events-none">Solar</span>
         </div>
-        <div ref={img4Ref} className="hidden md:block absolute top-[50%] md:top-[45%] right-[2%] md:right-[4%] w-[160px] md:w-[280px] aspect-[3/4] rounded-xl md:rounded-[24px] overflow-hidden shadow-2xl border-4 border-white">
+        <div ref={img4Ref} className="hidden md:block absolute top-[50%] md:top-[45%] right-[2%] md:right-[4%] w-[160px] md:w-[280px] aspect-[3/4] rounded-xl md:rounded-[24px] overflow-hidden shadow-2xl border-4 border-white cursor-pointer" onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000', type: 'image' } }))}>
           <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000" alt="Interior" className="w-full h-full object-cover" />
         </div>
-        <div ref={img3Ref} className="absolute bottom-[5%] md:bottom-[8%] left-[50%] md:left-[55%] -translate-x-1/2 w-[160px] md:w-[420px] aspect-[16/9] rounded-xl md:rounded-[48px] overflow-hidden shadow-2xl border-2 md:border-4 border-white">
+        <div ref={img3Ref} className="absolute bottom-[5%] md:bottom-[8%] left-[50%] md:left-[55%] -translate-x-1/2 w-[160px] md:w-[420px] aspect-[16/9] rounded-xl md:rounded-[48px] overflow-hidden shadow-2xl border-2 md:border-4 border-white cursor-pointer" onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: '/images/construction_progress_1789982002449.jpg', type: 'image' } }))}>
           <img src="/images/construction_progress_1789982002449.jpg" alt="Construction" className="w-full h-full object-cover" />
-          <span className="absolute bottom-2 md:bottom-6 right-3 md:right-6 text-white font-bold text-xs md:text-xl drop-shadow-lg tracking-wide">Construction</span>
+          <span className="absolute bottom-2 md:bottom-6 right-3 md:right-6 text-white font-bold text-xs md:text-xl drop-shadow-lg tracking-wide z-20 pointer-events-none">Construction</span>
         </div>
       </section>
 
@@ -503,7 +545,7 @@ export default function Home() {
             <p className="text-lime-400 font-bold tracking-wide mt-1 md:mt-0 uppercase">FAA-107 Certified</p>
           </div>
           <div className="flex justify-between items-center pt-2">
-            <img src="/Drone-Logo-2 long.png" alt="Dronefuze Imagery" className="h-8 md:h-10 object-contain" />
+            <img src="/Drone-Logo-2 long.png" alt="Dronefuze Imagery" className="h-8 md:h-10 object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(90%) sepia(29%) saturate(1131%) hue-rotate(25deg) brightness(97%) contrast(85%)' }} />
             <button className="bg-lime-400 text-black px-4 md:px-6 py-2 rounded-lg font-bold text-xs md:text-sm hover:bg-lime-500 transition shadow-lg">
               Call 949-433-7838
             </button>
@@ -511,6 +553,32 @@ export default function Home() {
         </div>
       </footer>
     </main>
+    
+    {/* Lightbox Modal UI */}
+    {lightbox && (
+      <div 
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl transition-all duration-300 opacity-100"
+        onClick={() => setLightbox(null)}
+      >
+        <button 
+          className="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white bg-white/10 hover:bg-white/20 p-3 md:p-4 rounded-full transition-all duration-300 z-[101]"
+          onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        
+        <div 
+          className="w-[95vw] h-[85vh] md:w-[85vw] md:h-[85vh] flex items-center justify-center animate-in zoom-in-95 duration-300"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {lightbox.type === 'image' ? (
+            <img src={lightbox.src} alt="Expanded view" className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10" />
+          ) : (
+            <video src={lightbox.src} controls autoPlay className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 outline-none" />
+          )}
+        </div>
+      </div>
+    )}
     </>
   );
 }

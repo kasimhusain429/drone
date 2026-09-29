@@ -53,7 +53,10 @@ export default function ResidentialSection() {
                     {/* Mobile Accordion Details */}
                     {isActive && (
                       <div className="lg:hidden mt-2 mb-4 p-5 bg-white/5 rounded-xl border border-white/10 flex flex-col gap-4">
-                        <div className="w-full h-40 rounded-lg overflow-hidden relative">
+                        <div 
+                          className="w-full h-40 rounded-lg overflow-hidden relative cursor-pointer"
+                          onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: service.img, type: 'image' } }))}
+                        >
                            <img src={service.img} alt={service.title} className="w-full h-full object-cover" />
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed">
@@ -111,7 +114,10 @@ export default function ResidentialSection() {
                     </div>
 
                     {/* Image Area */}
-                    <div className="w-full md:w-1/2 relative bg-[#1a1a1a] min-h-[300px]">
+                    <div 
+                      className="w-full md:w-1/2 relative bg-[#1a1a1a] min-h-[300px] cursor-pointer"
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: activeService.img, type: 'image' } }))}
+                    >
                       <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none mix-blend-overlay"></div>
                       <img 
                         key={activeService.img} // Force re-render for animation

@@ -40,7 +40,10 @@ const VideoCard = ({ videoSrc, poster, title, subtitle, info }: { videoSrc: stri
   }, []);
 
   return (
-    <div className="w-[85vw] md:w-auto h-auto md:h-[40vh] min-h-[400px] md:min-h-[300px] md:max-h-[500px] aspect-[4/5] md:aspect-[16/9] flex-shrink-0 relative group rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#141414] shadow-2xl">
+    <div 
+      className="w-[85vw] md:w-auto h-auto md:h-[40vh] min-h-[400px] md:min-h-[300px] md:max-h-[500px] aspect-[4/5] md:aspect-[16/9] flex-shrink-0 relative group rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#141414] shadow-2xl cursor-pointer"
+      onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: videoSrc, type: 'video' } }))}
+    >
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 pointer-events-none"></div>
       
       <video
@@ -146,6 +149,19 @@ export default function VideoGalleryShowcase() {
               <div className="flex gap-4">
                  <span className="px-4 py-1.5 rounded-full border border-lime-400/50 text-lime-400 text-xs font-semibold bg-lime-400/10 backdrop-blur-md">New Feature</span>
                  <span className="px-4 py-1.5 rounded-full border border-white/20 text-xs font-semibold bg-white/5 backdrop-blur-md">Real Estate</span>
+              </div>
+            }
+          />
+
+          <VideoCard 
+            videoSrc="/videos/yt_drone_clip.mp4"
+            poster="/images/construction_progress_1789982002449.jpg"
+            title="Passion Projects"
+            subtitle="Dynamic, high-speed aerial tracking to capture adrenaline-pumping moments and showcase vehicles with cinematic flair."
+            info={
+              <div className="flex gap-4">
+                 <span className="px-4 py-1.5 rounded-full border border-lime-400/50 text-lime-400 text-xs font-semibold bg-lime-400/10 backdrop-blur-md">Automotive</span>
+                 <span className="px-4 py-1.5 rounded-full border border-white/20 text-xs font-semibold bg-white/5 backdrop-blur-md">Cinematic</span>
               </div>
             }
           />
