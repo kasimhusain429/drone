@@ -2,15 +2,62 @@
 import React, { useState } from 'react';
 
 const residentialServices = [
-  { id: '01', title: 'Construction Monitoring', desc: 'Video and or photography of construction project. Paired with a Project permits you to follow timelines.', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000' },
-  { id: '02', title: 'Roofing', desc: 'Ensuring no errors were made and option of thermal inspection to identify potential leaks.', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000' },
-  { id: '03', title: 'Interior Ground Data', desc: 'Coupled with 3D Matterport.', img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000' },
-  { id: '04', title: 'Real Estate', desc: 'Real Estate videography and walkthrough.', img: '/images/uploaded/media_1790585529102.jpg' },
-  { id: '05', title: 'Special', desc: 'High end custom car and truck video creation.', img: '/images/uploaded/media_1790585529089.jpg' },
+  { id: '01', title: 'Construction Monitoring', desc: 'Video and or photography of construction project. Paired with a Project permits you to follow timelines.', media: [
+    {type: 'image', src: '/images/Res-const-1.JPG'},
+    {type: 'image', src: '/images/Res-Pre-const-2.JPG'},
+    {type: 'image', src: '/images/Res-Pre-const-3.JPG'},
+    {type: 'image', src: '/images/Res-Pre-const-4.JPG'},
+    {type: 'image', src: '/images/Res-Pre-const-5.JPG'}
+  ] },
+  { id: '02', title: 'Roofing', desc: 'Ensuring no errors were made and option of thermal inspection to identify potential leaks.', media: [
+    {type: 'image', src: '/images/roofing_inspection_1789981969219.jpg'},
+    {type: 'image', src: '/images/Commercial-Roof-1.JPG'},
+    {type: 'image', src: '/images/Commercial-Roof-2.JPG'},
+    {type: 'video', src: '/videos/Commercial-Roof-3.MP4'},
+    {type: 'image', src: '/images/Commercial-Roof-4.JPG'}
+  ] },
+  { id: '03', title: 'Real Estate', desc: 'Real Estate videography and walkthrough.', media: [
+    {type: 'image', src: '/images/Res_RealEstate-1.jpg'},
+    {type: 'image', src: '/images/Res_RealEstate-2.jpg'},
+    {type: 'image', src: '/images/Res_RealEstate-3.jpeg'},
+    {type: 'image', src: '/images/Res_RealEstate-4.jpg'},
+    {type: 'image', src: '/images/Res_RealEstate-5.jpg'},
+    {type: 'image', src: '/images/Res_RealEstate-6.jpg'}
+  ] },
+  { id: '04', title: 'Special', desc: 'High end custom car and truck video creation.', media: [
+    {type: 'image', src: '/images/Res-Special-car-1.jpeg'},
+    {type: 'image', src: '/images/Res-Special-car-2.jpg'},
+    {type: 'image', src: '/images/Res-Special-car-3.jpeg'},
+    {type: 'video', src: '/videos/yt_drone_clip.mp4'}
+  ] },
 ];
 
 export default function ResidentialSection() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeMediaIndex, setActiveMediaIndex] = useState<number>(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = (mediaLength: number) => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    if (isLeftSwipe) {
+      setActiveMediaIndex(prev => prev === mediaLength - 1 ? 0 : prev + 1);
+    } else if (isRightSwipe) {
+      setActiveMediaIndex(prev => prev === 0 ? mediaLength - 1 : prev - 1);
+    }
+  };
 
   const currentData = residentialServices;
   const activeService = activeIndex >= 0 ? currentData[activeIndex] : null;
@@ -39,7 +86,7 @@ export default function ResidentialSection() {
                 return (
                   <div key={service.id} className="flex flex-col">
                     <button
-                      onClick={() => setActiveIndex(isActive ? -1 : index)}
+                      onClick={() => { setActiveIndex(isActive ? -1 : index); setActiveMediaIndex(0); }}
                       className={`flex items-center gap-4 py-3 px-5 rounded-xl transition-all duration-300 text-left ${isActive ? 'bg-white/5 shadow-lg border border-white/10' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
                     >
                       <span className={`text-xs font-mono font-bold ${isActive ? 'text-lime-400' : 'text-neutral-500'}`}>
@@ -54,10 +101,49 @@ export default function ResidentialSection() {
                     {isActive && (
                       <div className="lg:hidden mt-2 mb-4 p-5 bg-white/5 rounded-xl border border-white/10 flex flex-col gap-4">
                         <div 
-                          className="w-full h-40 rounded-lg overflow-hidden relative cursor-pointer"
-                          onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: service.img, type: 'image' } }))}
+                          className="w-full h-40 rounded-lg overflow-hidden relative cursor-pointer group"
+                          onTouchStart={onTouchStart}
+                          onTouchMove={onTouchMove}
+                          onTouchEnd={() => onTouchEnd(service.media.length)}
                         >
-                           <img src={service.img} alt={service.title} className="w-full h-full object-cover" />
+                          <div onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: service.media[activeMediaIndex].src, type: service.media[activeMediaIndex].type } }))} className="absolute inset-0 w-full h-full">
+                            {service.media[activeMediaIndex].type === 'video' ? (
+                              <video src={service.media[activeMediaIndex].src} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                            ) : (
+                              <img src={service.media[activeMediaIndex].src} alt={service.title} className="w-full h-full object-cover" />
+                            )}
+                          </div>
+                          
+                          {/* Navigation Arrows */}
+                          {service.media.length > 1 && (
+                            <>
+                              <button 
+                                onClick={(e) => { e.stopPropagation(); setActiveMediaIndex((prev) => (prev === 0 ? service.media.length - 1 : prev - 1)); }}
+                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                              >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                              </button>
+                              <button 
+                                onClick={(e) => { e.stopPropagation(); setActiveMediaIndex((prev) => (prev === service.media.length - 1 ? 0 : prev + 1)); }}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                              >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                              </button>
+                            </>
+                          )}
+                          
+                          {/* Navigation Dots */}
+                          {service.media.length > 1 && (
+                            <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-20">
+                              {service.media.map((_, i) => (
+                                <button
+                                  key={i}
+                                  onClick={(e) => { e.stopPropagation(); setActiveMediaIndex(i); }}
+                                  className={`h-1.5 rounded-full transition-all ${i === activeMediaIndex ? 'bg-lime-400 w-3' : 'bg-white/50 w-1.5 hover:bg-white'}`}
+                                />
+                              ))}
+                            </div>
+                          )}
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed">
                           {service.desc}
@@ -115,16 +201,64 @@ export default function ResidentialSection() {
 
                     {/* Image Area */}
                     <div 
-                      className="w-full md:w-1/2 relative bg-[#1a1a1a] min-h-[300px] cursor-pointer"
-                      onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: activeService.img, type: 'image' } }))}
+                      className="w-full md:w-1/2 relative bg-[#1a1a1a] min-h-[300px] cursor-pointer group"
+                      onTouchStart={onTouchStart}
+                      onTouchMove={onTouchMove}
+                      onTouchEnd={() => onTouchEnd(activeService.media.length)}
                     >
                       <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none mix-blend-overlay"></div>
-                      <img 
-                        key={activeService.img} // Force re-render for animation
-                        src={activeService.img} 
-                        alt={activeService.title}
-                        className="absolute inset-0 w-full h-full object-cover animate-fade-in"
-                      />
+                      
+                      <div onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { src: activeService.media[activeMediaIndex].src, type: activeService.media[activeMediaIndex].type } }))} className="absolute inset-0 w-full h-full">
+                        {activeService.media[activeMediaIndex].type === 'video' ? (
+                          <video
+                            key={activeService.media[activeMediaIndex].src}
+                            src={activeService.media[activeMediaIndex].src}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover animate-fade-in"
+                          />
+                        ) : (
+                          <img 
+                            key={activeService.media[activeMediaIndex].src}
+                            src={activeService.media[activeMediaIndex].src} 
+                            alt={activeService.title}
+                            className="w-full h-full object-cover animate-fade-in"
+                          />
+                        )}
+                      </div>
+
+                      {/* Navigation Arrows */}
+                      {activeService.media.length > 1 && (
+                        <>
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); setActiveMediaIndex((prev) => (prev === 0 ? activeService.media.length - 1 : prev - 1)); }}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-black/80"
+                          >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                          </button>
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); setActiveMediaIndex((prev) => (prev === activeService.media.length - 1 ? 0 : prev + 1)); }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-black/80"
+                          >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                          </button>
+                        </>
+                      )}
+
+                      {/* Navigation Dots */}
+                      {activeService.media.length > 1 && (
+                        <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-20">
+                          {activeService.media.map((_, i) => (
+                            <button
+                              key={i}
+                              onClick={(e) => { e.stopPropagation(); setActiveMediaIndex(i); }}
+                              className={`h-2 rounded-full transition-all ${i === activeMediaIndex ? 'bg-lime-400 w-4' : 'bg-white/50 w-2 hover:bg-white'}`}
+                            />
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </>
                 ) : (
